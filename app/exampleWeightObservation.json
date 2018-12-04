@@ -1,0 +1,36 @@
+{
+  "resourceType": "Observation",
+  "id": "body-weight",
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://hl7.org/fhir/observation-category",
+          "code": "vital-signs",
+          "display": "Vital Signs"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "29463-7",
+        "display": "Body Weight"
+      }
+    ]
+  },
+  "effectiveDateTime": "2018-10-03",
+  "performer": {
+      "reference": "Organization/1",
+      "display": "Mordor Weight Loss"
+  },
+  "valueQuantity": {
+    "value": 185,
+    "unit": "lbs",
+    "system": "http://unitsofmeasure.org",
+    "code": "[lb_av]"
+  }
+}

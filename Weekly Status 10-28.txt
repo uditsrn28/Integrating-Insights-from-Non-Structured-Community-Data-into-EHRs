@@ -1,0 +1,4 @@
+- Planned goals with the team
+- Met and reviewed Synthetic data with Advisor
+- Explored SMART 
+- Got Jenkins file working on HDAP Deployment. 

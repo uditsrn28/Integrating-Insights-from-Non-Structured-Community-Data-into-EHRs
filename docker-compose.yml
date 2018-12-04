@@ -1,0 +1,21 @@
+version: '2'
+services:
+  pd-web:
+    restart: always
+    build: tools/localdev/Dockerfile .
+    container_name: pd
+    ports:
+     - "9001:9001"
+    environment:
+     - NODE_ENV=dev 
+    volumes_from:
+     - pd-web-data
+  pd-web-data:
+    build: .
+    entrypoint: /bin/true
+    volumes:
+     - ./:/home/node/src
+     - /home/node/src/node_modules
+     - /home/node/src/public
+     - /home/node/src/uploads
+     - /home/node/src/client/bower_components

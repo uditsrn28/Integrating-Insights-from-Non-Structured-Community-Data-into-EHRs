@@ -1,0 +1,99 @@
+.wrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.wrapper .block {
+    min-height: 150px;
+    width: 100%;
+    border: 5px solid rgb(224, 224, 224);
+    padding: 20px;
+}
+
+.block .dates  .date {
+    width: 50%
+}
+.block .dates  .chart {
+    width: 40%;
+}
+.block .org-info {
+    position: relative;
+}
+
+.header {
+    color: rgb(22, 95, 162);
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.table-header {
+    color: rgb(177, 177, 177);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.table-header i {
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+.table-header i:hover {
+    cursor: pointer;
+}
+
+.table-header .fa-caret-up {
+    position: relative;
+}
+.table-header .fa-caret-down {
+    position: relative;
+    bottom: 8px;
+}
+
+.height .chart {
+    min-height: 160px;
+}
+
+.content {
+    margin-left: 8px;
+    margin-top: 8px;
+}
+
+.content .content-item {
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.content .table-header {
+    margin-top: 8px;
+}
+
+.org-info .feedback {
+    position: absolute;
+    bottom: 25%;
+    right: 10%;
+}
+
+.feedback .icons {
+    font-size: 14px;
+    cursor: pointer;
+    display: none;
+}
+
+.feedback .icons .icon {
+    margin: 2px;
+}
+
+th {
+    font-weight: normal;
+}
+
+td {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+
+
+

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Community Programs</title>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- <script src="static/js/script.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="static/lib/require.js" data-main="static/js/script.js"></script>
+    <!-- FHIR Client JS Library -->
+    <script src='static/lib/fhir-client-v0.1.12.js'></script>
+    <!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
+    <!-- https://github.com/cerner/fhir-client-cerner-additions -->
+    <script src='static/lib/fhir-client-cerner-additions-1.0.0.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="wrapper d-flex flex-column align-items-center self-align-center mt-5">
+    <div class="block">
+        <div class="d-flex dates">
+            <div class="date">
+                <div class="header" id="patient-header"></div>
+                <div class="d-flex content">
+                    <div class="table-responsive">
+                        
+                        <table class="table-borderless" id="patient-data" style="width: 30%;">
+                                <thead>
+                                    <tr>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block  mt-3">
+        <div class="d-flex dates">
+            <div class="date">
+                <div class="header">Community Programs: Dates Served</div>
+                <div class="d-flex content">
+                    <div class="table-responsive">
+                        <table class="table-borderless" id="encounters-table" style="width: 60%;">
+                            <thead>
+                            <tr>
+                                <th style="width: 40%;">
+                                    <div class="d-flex table-header">
+                                        Program Type
+                                        <div class="d-flex flex-column">
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </th>
+                                <th style="width: 45%;">
+                                    <div class="d-flex table-header">
+                                        Organization
+                                        <div class="d-flex flex-column">
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </th>
+                                <th style="width: 20%;">
+                                    <div class="d-flex table-header">
+                                        Date
+                                        <div class="d-flex flex-column">
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- <tr>
+                                <td>Weight loss program</td>
+                                <td>Mordor weight loss</td>
+                                <td>2018-10-03</td>
+                            </tr>
+                            <tr>
+                                <td>Weight loss program</td>
+                                <td>Mordor weight loss</td>
+                                <td>2018-10-31</td>
+                            </tr>
+                            <tr>
+                                <td>Food assistance</td>
+                                <td>Bread for the city</td>
+                                <td>2018-09-02</td>
+                            </tr>
+                            <tr>
+                                <td>Diabetes management</td>
+                                <td>Solud y Vida</td>
+                                <td>2018-08-12</td>
+                            </tr>
+                            <tr>
+                                <td>Diabetes management</td>
+                                <td>Solud y Vida</td>
+                                <td>2018-06-15</td>
+                            </tr>
+                            <tr>
+                                <td>Diabetes prevention</td>
+                                <td>Shire DPP</td>
+                                <td>2016-03-14</td>
+                            </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="chart">
+                <canvas id="encounters-chart" width="600" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="block mt-3">
+        <div class="measurements">
+            <div class="header">Community Programs: Measurements Obtained</div>
+            <div class="d-flex content">
+                <div class="table-responsive">
+                    <table class="table-borderless" id="community-programs" style="width: 100%;">
+                        <thead>
+                        <tr>
+                            <th>
+                                <div class="d-flex table-header mr-5">
+                                    Measurement
+                                    <div class="d-flex flex-column">
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="d-flex table-header mr-5">
+                                    Value
+                                    <div class="d-flex flex-column">
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="d-flex table-header mr-5">
+                                    Date
+                                    <div class="d-flex flex-column">
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="d-flex table-header mr-8">
+                                    Organization
+                                    <div class="d-flex flex-column">
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </th>
+                            <th style="width: 30%;">
+                                <div class="d-flex table-header">
+                                    Approximate Frequency
+                                    <div class="d-flex flex-column">
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block mt-3">
+        <div class="d-flex flex-column height">
+            <div class="height-table">
+                <select class="header" id="select-header"></select>
+                <div class="d-flex content">
+                    <div class="table-responsive">
+                        <table class="table-borderless" id="single-measurement-table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="d-flex table-header mr-5">
+                                        Value
+                                        <div class="d-flex flex-column">
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="d-flex table-header mr-5">
+                                        Date
+                                        <div class="d-flex flex-column">
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="d-flex table-header mr-5">
+                                        Method
+                                        <div class="d-flex flex-column">
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="d-flex table-header mr-5">
+                                        Organization
+                                        <div class="d-flex flex-column">
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="chart mt-2">
+                <canvas id="chartHeight" width="1200" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="block mt-3">
+        <div class="d-flex flex-column org-info">
+            <div class="header">Community Program: Mordor Weight Loss</div>
+            <div class="content">
+                <div>
+                    <div class="table-header">Program Type</div>
+                    <div class="content-item"> Weight loss program</div>
+                </div>
+                <div>
+                    <div class="table-header">Program Description</div>
+                    <div class="content-item">The Mordor Weight Loss program is an intensive 12-week weight-loss program
+                        focusing on healthy behavior through healthy diet choices, meal portion control and increased
+                        physical activity.
+                    </div>
+                </div>
+                <div>
+                    <div class="table-header">Summary and Outcomes</div>
+                    <div class="content-item">- <span class="patient-name"></span> appears to be <span 
+                            class="text-success">active</span> in the program
+                    </div>
+                    <div class="content-item">- <span class="patient-name"></span> has had <span class="text-success"><span id="Weight-loss-program"></span> encounters</span>
+                        in the past year
+                    </div>
+                    <div class="content-item">- Since starting the program <span class="patient-name"></span> has <span
+                            class="text-success">gained 10 lbs</span></div>
+                    <div class="content-item">- Since starting the program <span class="patient-name"></span> has <span
+                            class="text-danger">lost 1 % HbA1c</span></div>
+                    <div class="content-item">- Since starting the program <span class="patient-name"></span> seems to be <span
+                            class="text-success"> improving</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="block mt-3">
+            <div class="d-flex flex-column org-info">
+                <div class="header">Community Program: Diabetes Management Org</div>
+                <div class="content">
+                    <div>
+                        <div class="table-header">Program Type</div>
+                        <div class="content-item"> Diabetes management</div>
+                    </div>
+                    <div>
+                        <div class="table-header">Program Description</div>
+                        <div class="content-item">Diabetes Management Org program is an intensive 12-week weight-loss program
+                            focusing on healthy behavior through healthy diet choices, meal portion control and increased
+                            physical activity.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="table-header">Summary and Outcomes</div>
+                        <div class="content-item">- <span class="patient-name"></span> appears to be <span
+                                class="text-success">active</span> in the program
+                        </div>
+                        <div class="content-item">- <span class="patient-name"></span> has had <span class="text-success"><span id="Diabetes-management"></span> encounters</span>
+                            in the past year
+                        </div>
+                        <div class="content-item">- Since starting the program <span class="patient-name"></span> has <span
+                                class="text-success">gained 10 lbs</span></div>
+                        <div class="content-item">- Since starting the program <span class="patient-name"></span> has <span
+                                class="text-danger">lost 4 % HbA1c</span></div>
+                        <div class="content-item">- Since starting the program <span class="patient-name"></span> seems to be <span
+                                class="text-success"> improving</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+</body>
+</html>
